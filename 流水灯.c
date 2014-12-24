@@ -92,7 +92,7 @@ void main(void)
         LED8 = !LED8;        
         DelayMS(200);     
         
-        for (i=0; i<8; i++)  //所有灯闪烁2次
+        for (i=0; i<3; i++)  //所有灯闪烁2次
         {
            LedOnOrOff(1);    //关闭所有LED灯
            DelayMS(200);
@@ -100,7 +100,7 @@ void main(void)
            DelayMS(200);
         }
         
-        LedOnOrOff(0);       //使所有LED灯熄灭状态
+        LedOnOrOff(1);       //使所有LED灯熄灭状态
         DelayMS(500);
     }
 }

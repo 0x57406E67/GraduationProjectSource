@@ -124,7 +124,7 @@ __interrupt void UART0_ISR(void)
 ****************************************************************************/
 void main(void)
 {	
-    uchar n;
+    uchar n,temp;
     CLKCONCMD &= ~0x40;                        //设置系统时钟源为32MHZ晶振
     while(CLKCONSTA & 0x40);                   //等待晶振稳定为32M
     CLKCONCMD &= ~0x47;                        //设置系统主时钟频率为32MHZ   
@@ -168,12 +168,64 @@ void main(void)
             UartSendString(RxData, count);   
             U0CSR |= 0x40;              
 */
-             LCD_wcom(0x80);
+            if (count <= 16)
+            {
+                    LCD_wcom(0x80);
+                    for (n = 0; n < count; n++)
+                    {
+                          LCD_wdate(RxData[n]);
+                          DelayMS(100);
+                    }
+            }
+            else if( count >16 && count <= 32)
+            {
+                temp = count / 2;
+                LCD_wcom(0x80);
+                for (n = 0; n < temp; n++)
+                {
+                    LCD_wdate(RxData[n]);
+                    DelayMS(100);
+                }
+                LCD_wcom(0x80+0x40);
+                for (n = temp; n < count; n++)
+                {
+                    LCD_wdate(RxData[n]);
+                    DelayMS(100);
+                }
+            }
+/*                while (count <= 16)
+                {
+                     LCD_wcom(0x80);
+                     for (n = 0; n < count; n++)
+                     {
+                           LCD_wdate(RxData[n]);
+                           DelayMS(100);
+                     }
+                     break;
+                }
+                while (count >16 && count <= 32)
+                {
+                    temp = count / 2;
+                    LCD_wcom(0x80);
+                    for (n = 0; n < temp; n++)
+                    {
+                        LCD_wdate(RxData[n]);
+                        DelayMS(100);
+                    }
+                    LCD_wcom(0x80+0x40);
+                    for (n = temp; n < count; n++)
+                    {
+                        LCD_wdate(RxData[n]);
+                        DelayMS(100);
+                    }
+                    break;
+                }*/
+             /*LCD_wcom(0x80);
              for (n = 0; n < count; n++)
              {
              	          LCD_wdate(RxData[n]);
              	          DelayMS(100);
-             }
+             }*/
      
             UartState = UART0_RX;           
             count = 0;                       
