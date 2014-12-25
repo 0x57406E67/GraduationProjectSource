@@ -11,8 +11,8 @@ typedef unsigned char uchar;
 typedef unsigned int  uint;
 
 #define LED1 P1_0       //定义P1.0口为LED1控制端
-#define LED2 P1_1       //定义P1.1口为LED2控制端
-#define LED3 P1_4       //定义P1.4口为LED3控制端
+#define LED2 P1_4       //定义P1.1口为LED2控制端
+#define LED3 P1_1       //定义P1.4口为LED3控制端
 #define KEY1 P0_1       //定义P0.1口为S1控制端
 
 

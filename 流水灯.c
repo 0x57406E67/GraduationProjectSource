@@ -92,7 +92,7 @@ void main(void)
         LED8 = !LED8;        
         DelayMS(200);     
         
-        for (i=0; i<3; i++)  //所有灯闪烁2次
+        for (i=0; i<2; i++)  //所有灯闪烁2次
         {
            LedOnOrOff(1);    //关闭所有LED灯
            DelayMS(200);
